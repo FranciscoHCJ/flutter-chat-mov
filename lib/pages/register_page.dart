@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'package:chatmov/helpers/mostrar_alerta.dart';
 import 'package:chatmov/services/auth_sercive.dart';
+import 'package:chatmov/services/socket_service.dart';
 
 import 'package:chatmov/widgets/custom_input.dart';
 import 'package:chatmov/widgets/boton_azul.dart';
@@ -57,6 +58,7 @@ class __FormState extends State<_Form> {
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
+    final socketService = Provider.of<SocketService>(context);
 
     return Container(
       margin: EdgeInsets.only(top: 40),
@@ -93,6 +95,7 @@ class __FormState extends State<_Form> {
 
                     if (registerOk == true) {
                       // Navegar a otra pantalla
+                      socketService.connect();
                       Navigator.pushReplacementNamed(context, 'usuarios');
                     } else {
                       // Mostrar alerta
